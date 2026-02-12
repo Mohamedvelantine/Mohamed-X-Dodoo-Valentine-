@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will you be my Valentine Dr.Dodoo 💘</title>
+<style>
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  padding:0;
+  overflow-x:hidden;
+  background: linear-gradient(135deg, #ff4d6d, #ffb6c1);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  color:white;
+}
+
+h1{
+  font-size:3em;
+  margin-bottom:40px;
+  text-shadow:2px 2px 8px #000;
+}
+
+button{
+  padding:15px 30px;
+  font-size:20px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  margin:10px;
+  transition: all 0.3s ease;
+}
+
+#yes{
+  background:#ff3366;
+  color:white;
+}
+
+#no{
+  background:#444;
+  color:white;
+  position:absolute;
+}
+
+/* صفحة الحب */
+#lovePage{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* قلوب */
+.heart{
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:red;
+  transform:rotate(45deg);
+  animation: float 4s linear infinite;
+  border-radius:3px 3px 0 0;
+}
+
+.heart::after,
+.heart::before{
+  content:'';
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:red;
+  border-radius:50%;
+}
+
+.heart::before{
+  top:-10px;
+  left:0;
+}
+
+.heart::after{
+  left:10px;
+  top:0;
+}
+
+/* حركة القلوب */
+@keyframes float{
+  0% { transform: translateY(0) rotate(45deg);}
+  100% { transform: translateY(-600px) rotate(45deg);}
+}
+
+img{
+  width:200px;
+  border-radius:15px;
+  margin:10px;
+}
+
+video{
+  width:300px;
+  border-radius:15px;
+  margin:10px;
+}
+
+.confetti{
+  position:fixed;
+  width:10px;
+  height:10px;
+  background:yellow;
+  top:0;
+  animation: confetti 3s linear forwards;
+}
+
+@keyframes confetti{
+  0% {transform: translateY(0) rotate(0deg);}
+  100% {transform: translateY(700px) rotate(360deg);}
+}
+</style>
+</head>
+<body>
+
+<!-- صفحة السؤال -->
+<div id="page1">
+  <h1>Will you be my Valentine Dr.Dodoo 💘</h1>
+  <button id="yes" onclick="showLove()">YES 💘</button>
+  <button id="no" onmouseover="moveNo()">NO 😈</button>
+</div>
+
+<!-- صفحة الحب -->
+<div id="lovePage">
+  <h1>I LOVE YOUUU ❤️</h1>
+  
+  <div id="imagesVideos">
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+    <video src="video1.mp4" autoplay loop muted></video>
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="love GIF">
+  </div>
+  
+  <p>You are my sweetest memory and my favorite person 💘</p>
+</div>
+
+<script>
+// زر NO يهرب ويكبر ويختفي
+function moveNo(){
+  var btn=document.getElementById("no");
+  btn.style.top=Math.random()*80+"%";
+  btn.style.left=Math.random()*80+"%";
+  btn.style.transform="scale("+(0.5+Math.random()*0.8)+")";
+  if(Math.random()<0.3){ // أحيانًا يختفي
+    btn.style.display="none";
+    setTimeout(()=>{btn.style.display="block"}, 2000);
+  }
+}
+
+// عرض صفحة الحب
+function showLove(){
+  document.getElementById("page1").style.display="none";
+  document.getElementById("lovePage").style.display="flex";
+  createHearts(30); // قلوب طائرة
+  createConfetti(50); // confetti
+}
+
+// إنشاء القلوب الطائرة
+function createHearts(num){
+  for(let i=0;i<num;i++){
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.style.left=Math.random()*window.innerWidth+"px";
+    heart.style.animationDuration=(3+Math.random()*3)+"s";
+    heart.style.opacity=Math.random();
+    document.body.appendChild(heart);
+  }
+}
+
+// إنشاء confetti
+function createConfetti(num){
+  for(let i=0;i<num;i++){
+    let conf=document.createElement("div");
+    conf.className="confetti";
+    conf.style.background=["#ff0","#f0f","#0ff","#fff"][Math.floor(Math.random()*4)];
+    conf.style.left=Math.random()*window.innerWidth+"px";
+    conf.style.animationDuration=(2+Math.random()*2)+"s";
+    document.body.appendChild(conf);
+  }
+}
+</script>
+</body>
+</html>
